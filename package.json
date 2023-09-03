@@ -1,0 +1,16 @@
+{
+  "name": "crud_user",
+  "version": "1.0.0",
+  "description": "CRUD desenvolvido em Node.js para Capacitação do Ex Machina",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  }
+}

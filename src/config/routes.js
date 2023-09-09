@@ -1,5 +1,5 @@
 const express = require("express");
-const {getUsers, postUser, putUser, deleteUser} = require("./app.js");
+const {getUsers, postUser, putUser, deleteUser} = require("./app2.js");
 const router = express.Router();
 
 router.get("/users", getUsers);

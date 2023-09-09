@@ -1,9 +1,10 @@
 const express = require("express");
+const {getUsers, postUser, putUser, deleteUser} = require("./app.js");
 const router = express.Router();
 
-router.get("/users", (req, res) => res.send("Função de listar os suários"));
-router.post("/users", (req, res) => res.send("Função de adicionar usuário"));
-router.put("/users/:id", (req, res) => res.send("Função de modificar usuário"));
-router.delete("/users/:id", (req, res) => res.send("Função de deletar usuário"));
+router.get("/users", getUsers);
+router.post("/users", postUser);
+router.put("/users/:id", putUser);
+router.delete("/users/:id", deleteUser);
 
 module.exports = router;

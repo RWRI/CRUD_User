@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const CryptoJS = require('crypto-js');
 
 const users = [
     {
@@ -32,11 +33,13 @@ const postUser = (req, res) => {
     if(confereEmail(email))
         return res.status(400).send("Email já cadastrado no banco");
 
+    const senhaCriptografada = CryptoJS.MD5(password).toString();
+
     const novoUsuario = {
         id: uuidv4(),
         email,
         user,
-        password
+        password:senhaCriptografada,
     }
     users.push(novoUsuario);
     return res.status(201).send(users);
@@ -59,7 +62,7 @@ const putUser = (req, res) => {
     }
     
     if(user)     users[pos].user = user;
-    if(password) users[pos].password = password;
+    if(password) users[pos].password = CryptoJS.MD5(password).toString();
     
     return res.status(204).send();
     

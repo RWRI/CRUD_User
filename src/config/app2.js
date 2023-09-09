@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.putUser = exports.postUser = exports.getUsers = void 0;
 var uuid_1 = require("uuid");
+var CryptoJS = require("crypto-js");
 var users = [
     {
         "id": "1e6da728-865c-4bbb-8f90-9370fc738e8a",
@@ -31,6 +32,7 @@ function postUser(req, res) {
     if (_confereEmail(usuario.email))
         return res.status(400).send("Email já cadastrado no banco");
     usuario.id = (0, uuid_1.v4)();
+    usuario.password = CryptoJS.MD5(usuario.password).toString();
     users.push(usuario);
     return res.status(201).send(users);
 }
@@ -51,7 +53,7 @@ function putUser(req, res) {
     if (usuario.user)
         users[pos].user = usuario.user;
     if (usuario.password)
-        users[pos].password = usuario.password;
+        users[pos].password = CryptoJS.MD5(usuario.password).toString();
     return res.status(204).send();
 }
 exports.putUser = putUser;

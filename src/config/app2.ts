@@ -1,6 +1,7 @@
 import { v4 as uuidv4} from 'uuid';
 import { User } from "../user";
 import { request, response } from 'express';
+import * as CryptoJS from 'crypto-js';
 
 const users : User[] = [
     {
@@ -35,6 +36,7 @@ export function postUser(req: request, res: response): boolean{
         return res.status(400).send("Email já cadastrado no banco");
 
     usuario.id = uuidv4();
+    usuario.password = CryptoJS.MD5(usuario.password).toString()
     users.push(usuario);
     return res.status(201).send(users);
 }
@@ -56,7 +58,7 @@ export function putUser(req: request, res: response) : boolean{
     }
     
     if(usuario.user)     users[pos].user = usuario.user;
-    if(usuario.password) users[pos].password = usuario.password;
+    if(usuario.password) users[pos].password = CryptoJS.MD5(usuario.password).toString();
     
     return res.status(204).send();
     
